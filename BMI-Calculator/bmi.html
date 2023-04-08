@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BMI CalculatCalor</title>
+  </head>
+  <body>
+    <style>
+      body {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        font-weight: 500;
+      }
+      .title {
+        text-align: center;
+      }
+      #bmi-wrapper {
+        max-width: 100%;
+        width: 100%;
+        height: 100vh;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        margin-top: 30px;
+      }
+      .wp-box {
+        padding: 20px 0;
+        padding-top: 0;
+        display: flex;
+        flex-direction: column;
+      }
+      .desc {
+        margin-bottom: 40px;
+      }
+      .wp-input label {
+        margin-bottom: 10px;
+      }
+      .wp-input input {
+        padding: 10px;
+        border-radius: 3px;
+        border: 1px solid black;
+      }
+      #bmi-btn {
+        background-color: #6558f5;
+        color: white;
+        padding: 10px 18px;
+        text-align: center;
+        border: none;
+        border-radius: 3px;
+        display: inline-block;
+        font-size: 16px;
+      }
+      .wp-result {
+        margin-top: 20px;
+      }
+    </style>
+    <section id="bmi-wrapper">
+      <div class="bmi">
+        <div class="title">
+          <h1>Check Your BMI</h1>
+        </div>
+        <div class="desc">
+          <span>Enter Your weight and height below to check your BMI result</span>
+        </div>
+        <div class="wp-input">
+          <div class="wp-box">
+            <label for="">Put Your Weight in Here (KG)</label>
+            <input type="number" id="inputBerat" type="text" min="0" />
+          </div>
+          <div class="wp-box">
+            <label for="">Put Your Height in Here (CM)</label>
+            <input type="number" id="inputTinggi" type="text" min="0" />
+          </div>
+        </div>
+        <div class="wp-button">
+          <button onclick="calculate()" type="button" id="bmi-btn">Calculate BMI</button>
+        </div>
+        <div class="wp-result" id="bmi-result">
+          <span></span>
+        </div>
+      </div>
+    </section>
+    <script>
+      function calculate() {
+        let inputBerat = document.getElementById("inputBerat").value;
+        let inputTinggi = document.getElementById("inputTinggi").value;
+        let result = document.getElementById("bmi-result");
+
+        let beratBadan = inputBerat;
+        let tinggiBadan = inputTinggi;
+        let rumus = (beratBadan / (tinggiBadan / 100) ** 2).toPrecision(3);
+        let maxUnder = 18.5;
+        let maxNormal = 24.9;
+        let maxOver = 29.9;
+
+        if (rumus < maxUnder) {
+          result.innerHTML = "<span>Your BMI is </span>" + "<b>" + rumus + "</b>" + "<span> Which mean you are <b>underweight</b></span>";
+          console.log("Your BMI is " + rumus + "which mean you are underweight");
+        } else if (rumus >= maxUnder && rumus < maxNormal) {
+          result.innerHTML = "<span>Your BMI is </span>" + "<b>" + rumus + "</b>" + "<span> Which mean you are <b>normalweight</b></span>";
+          console.log("Your BMI is " + rumus + "which mean you are normalweight");
+        } else if (rumus >= maxNormal && rumus < maxOver) {
+          result.innerHTML = "<span>Your BMI is </span>" + "<b>" + rumus + "</b>" + "<span> Which mean you are <b>overweight</b></span>";
+          console.log("Your BMI is " + rumus + "which mean you are overweight");
+        } else if (rumus >= maxOver) {
+          result.innerHTML = "<span>Your BMI is </span>" + "<b>" + rumus + "</b>" + " <span>Which mean you are <b>obesity</b></span>";
+          console.log("Your BMI is " + rumus + "which mean you are obesity");
+        }
+      }
+    </script>
+  </body>
+</html>
